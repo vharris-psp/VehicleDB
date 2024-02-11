@@ -1,0 +1,41 @@
+@model IEnumerable<Vehicle>
+
+<h1>Vehicles</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>VIN</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Starting Mileage</th>
+            <th>Ending Mileage</th>
+            <th>Fuel Level</th>
+            <th>Starting Condition</th>
+            <th>Ending Condition</th>
+            <th>Reason For Trip</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Model)
+        {
+            <tr>
+                <td>@vehicle.VIN</td>
+                <td>@vehicle.Make</td>
+                <td>@vehicle.Model</td>
+                <td>@vehicle.StartingMileage</td>
+                <td>@vehicle.EndingMileage</td>
+                <td>@vehicle.FuelLevel</td>
+                <td>@vehicle.StartingCondition</td>
+                <td>@vehicle.EndingCondition</td>
+                <td>@vehicle.ReasonForTrip</td>
+                <td>
+                    <a asp-action="Details" asp-route-VIN="@vehicle.VIN">Details</a> |
+                    <a asp-action="Edit" asp-route-VIN="@vehicle.VIN">Edit</a> |
+                    <a asp-action="Delete" asp-route-VIN="@vehicle.VIN">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
