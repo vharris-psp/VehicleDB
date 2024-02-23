@@ -6,19 +6,34 @@ public class Vehicle
     [Required(ErrorMessage = "VIN is required.")]
     [StringLength(17, MinimumLength = 17, ErrorMessage = "VIN must be exactly 17 Characters")]
     public string VIN { get; set; }
-    public int StartingMileage { get; set; }
+    
     [Required(ErrorMessage = "Year is required.")]
     public int Year { get; set; }
     [Required(ErrorMessage = "Make is required.")]
     public string Make { get; set; }
     [Required(ErrorMessage = "Model is required.")]
     public string Model { get; set; }
-    public int EndingMileage { get; set; }
-    public int FuelLevel { get; set; }
-    public int StartingCondition { get; set; }
-    public int EndingCondition { get; set; }
-    public string ReasonForTrip { get; set; }
+    [Required(ErrorMessage = "Mileage is required.")]
+    public int CurrentMileage { get; set; }
+    [Required(ErrorMessage = "Fuel level is required.")]
+    public FuelLevel CurrentFuelLevel { get; set; }
+    [Required(ErrorMessage = "Condition is required.")]
+    public Condition CurrentCondition { get; set; }
     public ICollection<Trip> Trips { get; set; }
-    public ICollection<Person> Persons { get; set; }
-    
+    public enum FuelLevel
+    {
+    Empty,
+    Quarter,
+    Half,
+    ThreeQuarter,
+    Full
+    }
+
+    public enum Condition
+    {
+    Poor,
+    Fair,
+    Good,
+    Excellent
+    }
 }

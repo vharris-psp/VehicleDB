@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VehicleDB;
 
@@ -10,9 +11,11 @@ using VehicleDB;
 namespace VehicleDB.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240212235746_AddCurrentConditionColumn")]
+    partial class AddCurrentConditionColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
@@ -130,7 +133,6 @@ namespace VehicleDB.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("ReturnDate")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<TimeSpan?>("ReturnDepartureTime")
@@ -175,6 +177,9 @@ namespace VehicleDB.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("PersonId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StartingMileage")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Year")

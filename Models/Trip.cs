@@ -5,10 +5,15 @@ public class Trip
 {
     [Key]
     public int Id { get; set; }
+    [Required(ErrorMessage = "Date is required.")]
     public DateTime Date { get; set; }
+    [Required(ErrorMessage = "Return date is required.")]
     public DateTime? ReturnDate { get; set; }
+    [Required(ErrorMessage = "Departure time is required.")]
     public TimeSpan DepartureTime { get; set; }
+    [Required(ErrorMessage = "Arrival time is required.")]
     public TimeSpan ArrivalTime { get; set; }
+    
     public TimeSpan? ReturnDepartureTime { get; set; }
     public TimeSpan? ReturnArrivalTime { get; set; }
     public string ReasonForTrip { get; set; }

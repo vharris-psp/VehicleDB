@@ -9,8 +9,12 @@
     <ul>
         <a asp-controller="Vehicle" asp-action="Index">View Vehicles</a>
         <a asp-controller="Vehicle" asp-action="Create">Add Vehicle</a>
-        <li><a href="@Url.Action("Privacy", "Home")">Privacy Policy</a></li>
-        <li><a href="@Url.Action("About", "Home")">About Us</a></li>
+        <li><a asp-controller="Trip" asp-action="Index">View Trips</a></li>
+        <li><a asp-controller="Trip" asp-action="Create">Add Trip</a></li>
+        <li><a asp-controller="Person" asp-action="Index">View Persons</a></li>
+        <li><a asp-controller="Person" asp-action="Create">Add Person</a></li>
+        <li><a asp-controller="Issue" asp-action="Index">View Issues</a></li>
+        <li><a asp-controller="Issue" asp-action="Create">Add Issue</a></li>
         <!-- Add more links as needed -->
     </ul>
 </div>

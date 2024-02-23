@@ -51,8 +51,16 @@ namespace VehicleDB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("VIN,Make,Model,Year")] Vehicle vehicle)
         {
+            ModelState.Remove("Trips");
             if (ModelState.IsValid)
             {
+                // Check if VIN already exists
+                if (_context.Vehicles.Any(v => v.VIN == vehicle.VIN))
+                {
+                    ModelState.AddModelError("VIN", "VIN already exists.");
+                    return View(vehicle);
+                }
+
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -61,7 +69,7 @@ namespace VehicleDB.Controllers
         }
 
         // GET: Vehicle/Edit/5
-        public async Task<IActionResult> Edit(int? VIN)
+        public async Task<IActionResult> Edit(string VIN)
         {
             if (VIN == null)
             {
@@ -117,8 +125,7 @@ namespace VehicleDB.Controllers
                 return NotFound();
             }
 
-            var vehicle = await _context.Vehicles
-                .FirstOrDefaultAsync(m => m.VIN == VIN);
+            var vehicle = await _context.Vehicles.FirstOrDefaultAsync(m => m.VIN == VIN);
             if (vehicle == null)
             {
                 return NotFound();
@@ -133,6 +140,11 @@ namespace VehicleDB.Controllers
         public async Task<IActionResult> DeleteConfirmed(string VIN)
         {
             var vehicle = await _context.Vehicles.FindAsync(VIN);
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
             _context.Vehicles.Remove(vehicle);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
