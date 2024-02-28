@@ -1,55 +1,47 @@
-@model Vehicle
+@model Address
 
-<h1>Create Vehicle</h1>
+@{
+    ViewData["Title"] = "Create";
+}
 
-<form asp-action="Create">
-    <div class="form-group">
-        <label asp-for="VIN"></label>
-        <input asp-for="VIN" class="form-control" />
-        <span asp-validation-for="VIN" class="text-danger"></span>
+<h1>Create</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Street" class="control-label"></label>
+                <input asp-for="Street" class="form-control" />
+                <span asp-validation-for="Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="State" class="control-label"></label>
+                <input asp-for="State" class="form-control" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Zip" class="control-label"></label>
+                <input asp-for="Zip" class="form-control" />
+                <span asp-validation-for="Zip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label asp-for="Year"></label>
-        <input asp-for="Year" class="form-control" />
-        <span asp-validation-for="Year" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Make"></label>
-        <input asp-for="Make" class="form-control" />
-        <span asp-validation-for="Make" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Model"></label>
-        <input asp-for="Model" class="form-control" />
-        <span asp-validation-for="Model" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CurrentMileage"></label>
-        <input asp-for="CurrentMileage" class="form-control" />
-        <span asp-validation-for="CurrentMileage" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CurrentFuelLevel"></label>
-        <select asp-for="CurrentFuelLevel" class="form-control">
-            <option value="">Select Fuel Level</option>
-            <option value="Empty">Empty</option>
-            <option value="Quarter">Quarter</option>
-            <option value="Half">Half</option>
-            <option value="ThreeQuarter">ThreeQuarter</option>
-            <option value="Full">Full</option>
-        </select>
-        <span asp-validation-for="CurrentFuelLevel" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CurrentCondition"></label>
-        <select asp-for="CurrentCondition" class="form-control">
-            <option value="">Select Condition</option>
-            <option value="Poor">Poor</option>
-            <option value="Fair">Fair</option>
-            <option value="Good">Good</option>
-            <option value="Excellent">Excellent</option>
-        </select>
-        <span asp-validation-for="CurrentCondition" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

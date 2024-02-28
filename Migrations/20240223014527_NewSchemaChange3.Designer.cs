@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VehicleDB;
 
@@ -10,9 +11,11 @@ using VehicleDB;
 namespace VehicleDB.Migrations
 {
     [DbContext(typeof(VehicleDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240223014527_NewSchemaChange3")]
+    partial class NewSchemaChange3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
@@ -99,31 +102,12 @@ namespace VehicleDB.Migrations
                     b.ToTable("TripPassenger", (string)null);
                 });
 
-            modelBuilder.Entity("RentalLocation", b =>
-                {
-                    b.Property<int>("StoreID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("StoreAddressId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("StoreID");
-
-                    b.HasIndex("StoreAddressId");
-
-                    b.ToTable("RentalLocation");
-                });
-
             modelBuilder.Entity("Trip", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("AddressId1")
+                    b.Property<int>("ArrivalAddressId")
                         .HasColumnType("INTEGER");
 
                     b.Property<TimeSpan>("ArrivalTime")
@@ -132,16 +116,13 @@ namespace VehicleDB.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("DepartureAddressId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<TimeSpan>("DepartureTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("DriverID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DropOffLocationStoreID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PickupLocationStoreID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ReasonForTrip")
@@ -164,13 +145,9 @@ namespace VehicleDB.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("ArrivalAddressId");
 
-                    b.HasIndex("AddressId1");
-
-                    b.HasIndex("DropOffLocationStoreID");
-
-                    b.HasIndex("PickupLocationStoreID");
+                    b.HasIndex("DepartureAddressId");
 
                     b.HasIndex("VehicleVIN");
 
@@ -200,7 +177,7 @@ namespace VehicleDB.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("RentalLocationStoreID")
+                    b.Property<int?>("PersonId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Year")
@@ -208,7 +185,7 @@ namespace VehicleDB.Migrations
 
                     b.HasKey("VIN");
 
-                    b.HasIndex("RentalLocationStoreID");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Vehicles");
                 });
@@ -228,30 +205,17 @@ namespace VehicleDB.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RentalLocation", b =>
+            modelBuilder.Entity("Trip", b =>
                 {
-                    b.HasOne("Address", "StoreAddress")
-                        .WithMany()
-                        .HasForeignKey("StoreAddressId")
+                    b.HasOne("Address", "ArrivalAddress")
+                        .WithMany("ArrivalTrips")
+                        .HasForeignKey("ArrivalAddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("StoreAddress");
-                });
-
-            modelBuilder.Entity("Trip", b =>
-                {
-                    b.HasOne("Address", null)
-                        .WithMany("ArrivalTrips")
-                        .HasForeignKey("AddressId");
-
-                    b.HasOne("Address", null)
+                    b.HasOne("Address", "DepartureAddress")
                         .WithMany("DepartureTrips")
-                        .HasForeignKey("AddressId1");
-
-                    b.HasOne("RentalLocation", "DropOffLocation")
-                        .WithMany()
-                        .HasForeignKey("DropOffLocationStoreID")
+                        .HasForeignKey("DepartureAddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -261,32 +225,26 @@ namespace VehicleDB.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RentalLocation", "PickupLocation")
-                        .WithMany()
-                        .HasForeignKey("PickupLocationStoreID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Vehicle", "Vehicle")
                         .WithMany("Trips")
                         .HasForeignKey("VehicleVIN")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("ArrivalAddress");
+
+                    b.Navigation("DepartureAddress");
+
                     b.Navigation("Driver");
-
-                    b.Navigation("DropOffLocation");
-
-                    b.Navigation("PickupLocation");
 
                     b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("Vehicle", b =>
                 {
-                    b.HasOne("RentalLocation", null)
-                        .WithMany("VehiclesInInventory")
-                        .HasForeignKey("RentalLocationStoreID");
+                    b.HasOne("Person", null)
+                        .WithMany("Vehicles")
+                        .HasForeignKey("PersonId");
                 });
 
             modelBuilder.Entity("Address", b =>
@@ -299,11 +257,8 @@ namespace VehicleDB.Migrations
             modelBuilder.Entity("Person", b =>
                 {
                     b.Navigation("DrivenTrips");
-                });
 
-            modelBuilder.Entity("RentalLocation", b =>
-                {
-                    b.Navigation("VehiclesInInventory");
+                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("Vehicle", b =>

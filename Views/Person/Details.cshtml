@@ -1,12 +1,36 @@
-@model Vehicle
+@model Person
 
-<h1>Vehicle Details</h1>
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
 
 <div>
-    <h4>VIN: @Model.VIN</h4>
-    <h4>Make: @Model.Make</h4>
-    <h4>Model: @Model.Model</h4>
-    <h4>Starting Mileage: @Model.CurrentMileage</h4>
-    <h4>Fuel Level: @Model.CurrentFuelLevel</h4>
-    <h4>Starting Condition: @Model.CurrentCondition</h4>
+    <h4>Person</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>

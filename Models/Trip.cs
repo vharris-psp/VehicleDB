@@ -16,14 +16,12 @@ public class Trip
     
     public TimeSpan? ReturnDepartureTime { get; set; }
     public TimeSpan? ReturnArrivalTime { get; set; }
-    public string ReasonForTrip { get; set; }
-    public string VehicleVIN { get; set; }
+    public string ReasonForTrip { get; set; } = "";
     public Vehicle Vehicle { get; set; }
+    public string VehicleVIN { get; set; }
     public ICollection<Person> Passengers { get; set; }
-    public int DepartureAddressId { get; set; }
-    public Address DepartureAddress { get; set; }
-    public int ArrivalAddressId { get; set; }
-    public Address ArrivalAddress { get; set; }
+    public RentalLocation PickupLocation { get; set; }
+    public RentalLocation DropOffLocation { get; set; }
     public int DriverID { get; set; }
     public Person Driver { get; set; }
 

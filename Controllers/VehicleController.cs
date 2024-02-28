@@ -9,9 +9,9 @@ namespace VehicleDB.Controllers
 {
     public class VehicleController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly VehicleDbContext _context;
 
-        public VehicleController(AppDbContext context)
+        public VehicleController(VehicleDbContext context)
         {
             _context = context;
         }

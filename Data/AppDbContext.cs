@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using VehicleDB.Models;
 namespace VehicleDB
 {
-public class AppDbContext : DbContext
+public class VehicleDbContext : DbContext
 {
     public DbSet<Trip> Trips { get; set; }
     public DbSet<Vehicle> Vehicles { get; set; }
@@ -10,7 +10,7 @@ public class AppDbContext : DbContext
     public DbSet<Issue> Issues { get; set; }
     public DbSet<Address> Addresses { get; set; }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    public VehicleDbContext(DbContextOptions<VehicleDbContext> options) : base(options)
     {
 
     }
@@ -25,10 +25,6 @@ public class AppDbContext : DbContext
             .HasMany(t => t.Passengers)
             .WithMany(v => v.PassengerTrips)
             .UsingEntity(j => j.ToTable("TripPassenger"));
-        modelBuilder.Entity<Address>()
-            .HasMany(a => a.ArrivalTrips)
-            .WithOne(t => t.ArrivalAddress)
-            .HasForeignKey(t => t.ArrivalAddressId);
         modelBuilder.Entity<Trip>()
                 .HasOne(t => t.Driver)          // Assuming Driver is the navigation property in Trip referring to a Person entity
                 .WithMany(p => p.DrivenTrips)         // Assuming Trips is the navigation property in Person referring to a collection of Trip entities

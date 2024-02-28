@@ -7,8 +7,8 @@ namespace VehicleDB.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly AppDbContext _context;
-    public HomeController(ILogger<HomeController> logger, AppDbContext context)
+    private readonly VehicleDbContext _context;
+    public HomeController(ILogger<HomeController> logger, VehicleDbContext context)
     {
         _logger = logger;
         _context = context;

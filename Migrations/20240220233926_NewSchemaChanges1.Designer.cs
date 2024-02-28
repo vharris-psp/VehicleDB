@@ -10,7 +10,7 @@ using VehicleDB;
 
 namespace VehicleDB.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(VehicleDbContext))]
     [Migration("20240220233926_NewSchemaChanges1")]
     partial class NewSchemaChanges1
     {

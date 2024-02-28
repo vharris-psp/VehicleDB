@@ -10,7 +10,7 @@ using VehicleDB;
 
 namespace VehicleDB.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(VehicleDbContext))]
     [Migration("20240209011159_InitialCreate1")]
     partial class InitialCreate1
     {

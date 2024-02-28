@@ -1,55 +1,75 @@
-@model Vehicle
+@model Trip
 
-<h1>Create Vehicle</h1>
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Trip</h1>
 
 <form asp-action="Create">
     <div class="form-group">
-        <label asp-for="VIN"></label>
-        <input asp-for="VIN" class="form-control" />
-        <span asp-validation-for="VIN" class="text-danger"></span>
+        <label asp-for="Date" class="control-label"></label>
+        <input asp-for="Date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
     </div>
+
+    <!-- Other input fields for the Trip properties -->
+
     <div class="form-group">
-        <label asp-for="Year"></label>
-        <input asp-for="Year" class="form-control" />
-        <span asp-validation-for="Year" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Make"></label>
-        <input asp-for="Make" class="form-control" />
-        <span asp-validation-for="Make" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Model"></label>
-        <input asp-for="Model" class="form-control" />
-        <span asp-validation-for="Model" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CurrentMileage"></label>
-        <input asp-for="CurrentMileage" class="form-control" />
-        <span asp-validation-for="CurrentMileage" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CurrentFuelLevel"></label>
-        <select asp-for="CurrentFuelLevel" class="form-control">
-            <option value="">Select Fuel Level</option>
-            <option value="Empty">Empty</option>
-            <option value="Quarter">Quarter</option>
-            <option value="Half">Half</option>
-            <option value="ThreeQuarter">ThreeQuarter</option>
-            <option value="Full">Full</option>
+        <label asp-for="VehicleVIN" class="control-label"></label>
+        <select asp-for="VehicleVIN" class="form-control" asp-items="@Model.VehicleSelectList">
+            <option value="">Select a Vehicle</option>
         </select>
-        <span asp-validation-for="CurrentFuelLevel" class="text-danger"></span>
+        <span asp-validation-for="VehicleVIN" class="text-danger"></span>
     </div>
+
+    <!-- Add new vehicle option -->
     <div class="form-group">
-        <label asp-for="CurrentCondition"></label>
-        <select asp-for="CurrentCondition" class="form-control">
-            <option value="">Select Condition</option>
-            <option value="Poor">Poor</option>
-            <option value="Fair">Fair</option>
-            <option value="Good">Good</option>
-            <option value="Excellent">Excellent</option>
-        </select>
-        <span asp-validation-for="CurrentCondition" class="text-danger"></span>
+        <a href="#" id="addNewVehicle">Add New Vehicle</a>
     </div>
+
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
+
+<!-- Modal for adding a new vehicle -->
+<div class="modal" id="addVehicleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Vehicle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form for adding new vehicle -->
+                <form id="addVehicleForm">
+                    <div class="form-group">
+                        <label for="vin">VIN:</label>
+                        <input type="text" class="form-control" id="vin" name="vin">
+                    </div>
+                    <!-- Other input fields for the new vehicle -->
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('#addNewVehicle').click(function () {
+                $('#addVehicleModal').modal('show');
+            });
+
+            $('#addVehicleForm').submit(function (e) {
+                e.preventDefault();
+                var vin = $('#vin').val();
+                // Add logic to save the new vehicle with AJAX
+                // After saving, update the dropdown with the new vehicle
+                $('#addVehicleModal').modal('hide');
+            });
+        });
+    </script>
+}

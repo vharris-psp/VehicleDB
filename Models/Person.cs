@@ -12,10 +12,11 @@ public class Person
     public string LastName { get; set; }
     public string FullName { get { return $"{FirstName} {LastName}";}}
     [Required(ErrorMessage = "Birth date is required.")]
-    public DateTime DOB { get; set; }
-    public ICollection<Trip> DrivenTrips { get; set; }
-    public ICollection<Trip> PassengerTrips { get; set; }
-    public ICollection<Vehicle> Vehicles { get; set; }
+    [DataType(DataType.Date)]
+    public DateOnly DOB { get; set; }
 
-
+    // Navigation properties
+    public ICollection<Trip> DrivenTrips { get; set; } = new List<Trip>(); // Trips where this person is the driver
+    public ICollection<Trip> PassengerTrips { get; set; } = new List<Trip>(); // Trips where this person is a passenger
+    
 }
