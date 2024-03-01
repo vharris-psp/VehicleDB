@@ -9,7 +9,7 @@ public class VehicleDbContext : DbContext
     public DbSet<Person> Persons { get; set; } // Changed from Person to Persons
     public DbSet<Issue> Issues { get; set; }
     public DbSet<Address> Addresses { get; set; }
-
+    public DbSet<Store> Stores { get; set; }
     public VehicleDbContext(DbContextOptions<VehicleDbContext> options) : base(options)
     {
 
@@ -29,7 +29,8 @@ public class VehicleDbContext : DbContext
                 .HasOne(t => t.Driver)          // Assuming Driver is the navigation property in Trip referring to a Person entity
                 .WithMany(p => p.DrivenTrips)         // Assuming Trips is the navigation property in Person referring to a collection of Trip entities
                 .HasForeignKey(t => t.Id); 
-        
+        modelBuilder.Entity<Store>()
+                .OwnsOne(s => s.Hours); 
         base.OnModelCreating(modelBuilder);
     }
 }

@@ -39,6 +39,7 @@ public class AddressController : Controller
     {
         return View(await _context.Addresses.ToListAsync());
     }
+    
 }
 
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VehicleDB;
 
@@ -10,9 +11,11 @@ using VehicleDB;
 namespace VehicleDB.Migrations
 {
     [DbContext(typeof(VehicleDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240301012206_AddStoreTable2")]
+    partial class AddStoreTable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
@@ -322,19 +325,13 @@ namespace VehicleDB.Migrations
 
             modelBuilder.Entity("VehicleDB.Models.Store", b =>
                 {
-                    b.OwnsOne("VehicleDB.Models.StoreHours", "Hours", b1 =>
+                    b.OwnsOne("System.Collections.Generic.List<VehicleDB.Models.StoreHours>", "Hours", b1 =>
                         {
                             b1.Property<int>("StoreID")
                                 .HasColumnType("INTEGER");
 
-                            b1.Property<TimeSpan>("ClosingTime")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<int>("Day")
+                            b1.Property<int>("Capacity")
                                 .HasColumnType("INTEGER");
-
-                            b1.Property<TimeSpan>("OpeningTime")
-                                .HasColumnType("TEXT");
 
                             b1.HasKey("StoreID");
 

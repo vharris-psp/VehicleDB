@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VehicleDB;
 
@@ -10,9 +11,11 @@ using VehicleDB;
 namespace VehicleDB.Migrations
 {
     [DbContext(typeof(VehicleDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240301004444_AddStoreTable1")]
+    partial class AddStoreTable1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
@@ -218,21 +221,6 @@ namespace VehicleDB.Migrations
                     b.ToTable("Vehicles");
                 });
 
-            modelBuilder.Entity("VehicleDB.Models.Store", b =>
-                {
-                    b.Property<int>("StoreID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("StoreID");
-
-                    b.ToTable("Stores");
-                });
-
             modelBuilder.Entity("Person", b =>
                 {
                     b.HasOne("Address", "Address")
@@ -318,34 +306,6 @@ namespace VehicleDB.Migrations
                     b.HasOne("RentalLocation", null)
                         .WithMany("VehiclesInInventory")
                         .HasForeignKey("RentalLocationStoreID");
-                });
-
-            modelBuilder.Entity("VehicleDB.Models.Store", b =>
-                {
-                    b.OwnsOne("VehicleDB.Models.StoreHours", "Hours", b1 =>
-                        {
-                            b1.Property<int>("StoreID")
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<TimeSpan>("ClosingTime")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<int>("Day")
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<TimeSpan>("OpeningTime")
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("StoreID");
-
-                            b1.ToTable("Stores");
-
-                            b1.WithOwner()
-                                .HasForeignKey("StoreID");
-                        });
-
-                    b.Navigation("Hours")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Address", b =>

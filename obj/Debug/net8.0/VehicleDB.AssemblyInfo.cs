@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VehicleDB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56f58e3adba9ce177430f72a4e94fb1a7643e2e4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72c16c31dd5aa3c84ae07d9f50d8bdb5558be197")]
 [assembly: System.Reflection.AssemblyProductAttribute("VehicleDB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VehicleDB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

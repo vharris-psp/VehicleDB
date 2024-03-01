@@ -15,21 +15,19 @@ public class TripController : Controller
 
     public IActionResult Create()
     {
-        // Retrieve vehicles from the database
-    var vehicles = _context.Vehicles.ToList();
-    
-    // Create a select list for vehicles
-    var vehicleSelectList = new SelectList(vehicles, "VIN", "MakeModel");
-    
-    // Create an empty Trip object
-    var trip = new Trip();
+        var viewModel = new Trip
+        {
+        };
 
-    // Pass the Trip object and VehicleSelectList to the view
-    ViewData["VehicleSelectList"] = vehicleSelectList;
-    return View(trip);
+
+    return View(viewModel);
         
     }
-
+    private IEnumerable<Vehicle> GetVehicles()
+    {
+    // Return your vehicles from the database or wherever they are stored
+    return new List<Vehicle>(); // Placeholder
+    }
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Create(Trip trip)
@@ -48,19 +46,51 @@ public class TripController : Controller
 
         //TODO:
         
-        var viewModel = new TripCreateViewModel
-        {
-            Trip = trip,
-            VehicleSelectList = vehicleSelectList
-        };
         
-        return View(viewModel);
+        return View(trip);
         
     }
+    public IActionResult Index()
+    {
+        var trips = _context.Trips.ToList();
+        return View(trips);
+    }
+    public IActionResult Details(int id)
+    {
+        var trip = _context.Trips.FirstOrDefault(t => t.Id == id);
+        if (trip == null)
+        {
+            return NotFound();
+        }
+        
+        return View(trip);
+    }
+    public IActionResult Delete(int id)
+    {
+        var trip = _context.Trips.FirstOrDefault(t => t.Id == id); 
+        if (trip == null)
+        {
+            return NotFound();
+        }
+
+        return View(trip);
+    }
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public IActionResult DeleteConfirmed(int id)
+    {
+        var trip = _context.Trips.FirstOrDefault(t => t.Id == id); 
+        if (trip == null)
+        {
+            return NotFound();
+        }
+
+        _context.Trips.Remove(trip);
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
+    }
+
+
 }
-public class TripCreateViewModel
-{
-    public Trip Trip { get; set; }
-    public SelectList VehicleSelectList { get; set; }
-}
+
 }

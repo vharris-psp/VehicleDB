@@ -1,12 +1,21 @@
-@model Vehicle
+@model Trip
 
-<h1>Vehicle Details</h1>
+<h1>Details</h1>
 
 <div>
-    <h4>VIN: @Model.VIN</h4>
-    <h4>Make: @Model.Make</h4>
-    <h4>Model: @Model.Model</h4>
-    <h4>Starting Mileage: @Model.CurrentMileage</h4>
-    <h4>Fuel Level: @Model.CurrentFuelLevel</h4>
-    <h4>Starting Condition: @Model.CurrentCondition</h4>
+    <h4>Trip</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <!-- Add other details as needed -->
+    </dl>
 </div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>

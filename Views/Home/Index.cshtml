@@ -2,19 +2,62 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p>Visit other pages:</p>
-    <ul>
-        <a asp-controller="Vehicle" asp-action="Index">View Vehicles</a>
-        <a asp-controller="Vehicle" asp-action="Create">Add Vehicle</a>
-        <li><a asp-controller="Trip" asp-action="Index">View Trips</a></li>
-        <li><a asp-controller="Trip" asp-action="Create">Add Trip</a></li>
-        <li><a asp-controller="Person" asp-action="Index">View Persons</a></li>
-        <li><a asp-controller="Person" asp-action="Create">Add Person</a></li>
-        <li><a asp-controller="Issue" asp-action="Index">View Issues</a></li>
-        <li><a asp-controller="Issue" asp-action="Create">Add Issue</a></li>
-        <!-- Add more links as needed -->
-    </ul>
+<div class="container">
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Vehicles</h5>
+                    <p class="card-text">View and manage vehicles.</p>
+                    <a class="btn btn-primary" href="@Url.Action("Index", "Vehicle")">View Vehicles</a>
+                    <a class="btn btn-success" href="@Url.Action("Create", "Vehicle")">Add Vehicle</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Trips</h5>
+                    <p class="card-text">View and manage trips.</p>
+                    <a class="btn btn-primary" href="@Url.Action("Index", "Trip")">View Trips</a>
+                    <a class="btn btn-success" href="@Url.Action("Create", "Trip")">Add Trip</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Persons</h5>
+                    <p class="card-text">View and manage persons.</p>
+                    <a class="btn btn-primary" href="@Url.Action("Index", "Person")">View Persons</a>
+                    <a class="btn btn-success" href="@Url.Action("Create", "Person")">Add Person</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Issues</h5>
+                    <p class="card-text">View and manage issues.</p>
+                    <a class="btn btn-primary" href="@Url.Action("Index", "Issue")">View Issues</a>
+                    <a class="btn btn-success" href="@Url.Action("Create", "Issue")">Add Issue</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Locations</h5>
+                    <p class="card-text">Add and manage rental store locations.</p>
+                    <a class="btn btn-primary" href="@Url.Action("Index", "Store")">View Stores</a>
+                    <a class="btn btn-success" href="@Url.Action("Create", "Store")">Add Store</a>
+                </div>
+            </div>
+        </div>
+        <!-- Add more cards for other data types -->
+    </div>
 </div>

@@ -12,17 +12,7 @@
         <input asp-for="Date" class="form-control" />
         <span asp-validation-for="Date" class="text-danger"></span>
     </div>
-
-    <!-- Other input fields for the Trip properties -->
-
-    <div class="form-group">
-        <label asp-for="VehicleVIN" class="control-label"></label>
-        <select asp-for="VehicleVIN" class="form-control" asp-items="@Model.VehicleSelectList">
-            <option value="">Select a Vehicle</option>
-        </select>
-        <span asp-validation-for="VehicleVIN" class="text-danger"></span>
-    </div>
-
+    
     <!-- Add new vehicle option -->
     <div class="form-group">
         <a href="#" id="addNewVehicle">Add New Vehicle</a>

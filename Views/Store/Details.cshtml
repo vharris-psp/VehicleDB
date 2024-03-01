@@ -1,0 +1,19 @@
+@model Store
+
+@{
+    ViewData["Title"] = "Store Details";
+}
+
+<h1>Store Details</h1>
+
+<div>
+    <dl>
+        <dt>Store ID</dt>
+        <dd>@Model.StoreID</dd>
+        <dt>Location</dt>
+        <dd>@Model.Location</dd>
+        <!-- Display store hours if needed -->
+    </dl>
+</div>
+
+<a asp-action="Index">Back to Stores</a>

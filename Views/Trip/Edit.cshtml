@@ -1,14 +1,17 @@
-@model Vehicle
+@model Trip
 
-<h1>Edit Vehicle</h1>
+<h1>Edit Trip</h1>
 
 <form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
-        <label asp-for="VIN"></label>
-        <input asp-for="VIN" class="form-control" disabled />
-        <span asp-validation-for="VIN" class="text-danger"></span>
+        <label asp-for="Date" class="control-label"></label>
+        <input asp-for="Date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
     </div>
-    <!-- Add other input fields for Make, Model, etc. -->
-    
-    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <!-- Add other input fields for Trip properties -->
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
 </form>
